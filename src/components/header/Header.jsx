@@ -11,7 +11,8 @@ import {MdOutlineLocalCafe, MdOutlineShoppingCart} from 'react-icons/md';
 import styled from 'styled-components';
 
 const Container = styled.div`
-   
+   position: absolute;
+   z-index:1 ;
 `
 const SearchWrapper = styled.div`
     display:flex ;
