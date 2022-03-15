@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 // api
 import {getPalcesDetails} from '../../../api';
@@ -8,6 +8,7 @@ import Rating from '@material-ui/lab/Rating';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
+import {setPlaces} from '../../../redux/placeSlice'
 
 // API
 import {getPalcesNearby} from '../../../api'
@@ -43,28 +44,47 @@ const Chip = styled.button`
 
 
 const ListItem = ({place, selected }) => {
+
+  const bounds = useSelector(state=>state.location.bounds)
+  const  dispatch = useDispatch()
+
+  const [isDetailOpen, setIsDetailOpen] = useState(false)
+
   console.log(place.properties.rate);
   //console.log({selected});
   const  selectedItem = useRef()
-  if (selected) selectedItem?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  //if (selected) console.log('selected!! ',selectedItem.current);
-
-  const handleClickListItem = ()=>{
-    const xid = place.properties.xid
-    //getPalcesDetails(xid)
+  if (selected) {
+    selectedItem?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
 
-  const bounds = useSelector(state=>state.location.bounds)
+  //if (selected) console.log('selected!! ',selectedItem.current);
+
+  const handleClickTitle = ()=>{
+    const xid = place.properties.xid
+    getPalcesDetails(xid)
+    .then((data)=>{
+      setIsDetailOpen(true)
+      console.log(data);
+    })
+  }
+
+
   const handleClickKind = ()=>{
       const kind = place.properties.kinds.split(",")[0]
-      getPalcesNearby( bounds.sw, bounds.ne, kind)
+      getPalcesNearby( bounds.sw, bounds.ne, kind)   //  getPalcesNearby() >>> async func returning a promise
+      .then((data)=>{
+        console.log(data.slice(0,10));
+        dispatch(
+          setPlaces(data) 
+        )
+      })
 
   }
   
   return (
-    <Container ref={selectedItem} onClick={handleClickListItem}>
-      <Title> {place.properties.name}</Title>
+    <Container ref={selectedItem}>
+      <Title onClick={handleClickTitle}> {place.properties.name}</Title>
       <Rating name="read-only" value={place.properties.rate} readOnly />
 
       <Chips>

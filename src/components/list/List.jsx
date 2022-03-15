@@ -1,4 +1,4 @@
-import React,{useEffect, useState, createRef} from 'react'
+import React,{useEffect, useState, createRef, useRef} from 'react'
 
 // MaterialUI components
 import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
@@ -41,15 +41,21 @@ const List = ({ childClicked}) => {
 
   //console.log({elementRefs});
   //console.log({childClicked});
+  const  listItems = useRef()
+  if(childClicked){
+    console.log(listItems.current.children[childClicked]);
+    listItems.current.children[childClicked].style.border=`2px double red`
+  }
 
   return (
-    <Container>
+    <Container ref={listItems}>
      { console.log(places)}
      
       {/* {places?.map()  } */}
       {places && places.map( (place,i)=>(
         <ListItem place={place} key={i} 
                   selected={Number(childClicked) === i} 
+                  
                   />
       )
         )}
