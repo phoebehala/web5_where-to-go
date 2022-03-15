@@ -4,7 +4,7 @@ import React,{useEffect, useState, createRef} from 'react'
 import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
 
 // components
-import ListItem from '../listItem/ListItem';
+import ListItem from './listItem/ListItem';
 
 import styled from 'styled-components';
 
@@ -14,7 +14,7 @@ const Container = styled.div`
    height:100px ;
    width:100% ;
    bottom:0 ;
-   background-color:tomato ;
+   background-color:white ;
 
    padding: 10px 5px;
 
