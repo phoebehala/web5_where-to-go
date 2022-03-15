@@ -10,12 +10,16 @@ import List from '../components/list/List'
 import {getPalcesNearby} from '../api'
 
 // redux
-import {setCoordinates} from '../redux/locationSlice'
 import { useDispatch, useSelector } from 'react-redux';
+import {setCoordinates} from '../redux/locationSlice'
+import {setPlaces} from '../redux/placeSlice'
+
 
 import styled from 'styled-components';
 
-const Container = styled.div``
+const Container = styled.div`
+    /* overflow:hidden  ; */
+`
 
 const Home = () => {
 
@@ -23,7 +27,8 @@ const Home = () => {
   const bounds = useSelector(state=>state.location.bounds)
   const coordinates = useSelector(state=>state.location.coordinates)
 
-  const [places,setPlaces] = useState([])
+  //const [places,setPlaces] = useState([])
+  const places = useSelector(state=>state.place.places)
 
   const [childClicked, setChildClicked] = useState(null)
 
@@ -44,7 +49,9 @@ const Home = () => {
       getPalcesNearby(bounds.sw, bounds.ne)
       .then((data)=>{
         console.log(data.slice(0,10));
-        setPlaces(data) 
+        dispatch(
+          setPlaces(data) 
+        )
         console.log('Places',places);
       })
     }
@@ -54,10 +61,10 @@ const Home = () => {
     <Container>
         <Header />
         <Map 
-          places={places}
+          //places={places}
           setChildClicked = {setChildClicked}
         />
-        <List places={places}
+        <List //places={places}
               childClicked={childClicked}/>
     </Container>
   )

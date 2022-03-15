@@ -6,6 +6,10 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 // components
 import ListItem from './listItem/ListItem';
 
+// redux
+import {setCoordinates, setBounds} from '../../redux/locationSlice'
+import { useDispatch, useSelector } from 'react-redux';
+
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -23,7 +27,9 @@ const Container = styled.div`
    overflow: scroll;
 `
 
-const List = ({places, childClicked}) => {
+const List = ({ childClicked}) => {
+
+  const places = useSelector(state=>state.place.places)
 
   // in order to access the listItem a user clicked
   // at the start, there is no any places so elementIndex is an empty arr

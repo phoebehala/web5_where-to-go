@@ -23,10 +23,11 @@ const Container = styled.div`
    height:100vh ;
 `
 
-const Map = ( { places, setChildClicked} ) => {
+const Map = ( {setChildClicked} ) => {
 
   const dispatch = useDispatch()
   const coordinates = useSelector(state=>state.location.coordinates)
+  const places = useSelector(state=>state.place.places)
 
   return (
     <Container>
@@ -49,13 +50,12 @@ const Map = ( { places, setChildClicked} ) => {
           onChildClick={(child)=>{setChildClicked(child)}}
         >
           {places && places.map((place,i)=>(    
-              <div
+              <MapItem
                 key={i}
                 lat={place.geometry.coordinates[1]}
                 lng={place.geometry.coordinates[0]}
-              >
-                <MapItem place={place}/>       
-              </div>
+                place={place} 
+              />
           ))
           }
 
