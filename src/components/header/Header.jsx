@@ -9,7 +9,7 @@ import {GrCafeteria} from 'react-icons/gr';
 import {MdOutlineLocalCafe, MdOutlineShoppingCart} from 'react-icons/md';
 
 // redux
-import {fetchDataByKinds} from '../../redux/KindSlice'
+import {setPlaces} from '../../redux/placeSlice'
 import { useDispatch, useSelector } from 'react-redux';
 
 // API
@@ -56,9 +56,16 @@ const Header = () => {
     const bounds = useSelector(state=>state.location.bounds)
     const coordinates = useSelector(state=>state.location.coordinates)
 
+    const  dispatch = useDispatch()
+
     const handleClickKind = (kind)=>{
         getPalcesNearby( bounds.sw, bounds.ne, kind)
-
+        .then((data)=>{
+            console.log(data.slice(0,10));
+            dispatch(
+              setPlaces(data) 
+            )
+        })
     }
 
   return (
