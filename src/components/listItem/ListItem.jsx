@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
 
 import styled from 'styled-components';
@@ -14,12 +14,16 @@ const Container = styled.div`
 `
 
 
-const ListItem = ({place}) => {
-  console.log(place);
-
+const ListItem = ({place, selected }) => {
+  //console.log(place);
+  //console.log({selected});
+  const  selectedItem = useRef()
+  if (selected) selectedItem?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  //if (selected) console.log('selected!! ',selectedItem.current);
+  
   return (
     <Container>
-      <div className='title'>{place.placeName}</div>
+      <div ref={selectedItem} className='title'>{place.properties.name}</div>
     </Container>
   )
 }
