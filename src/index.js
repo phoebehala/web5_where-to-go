@@ -5,10 +5,14 @@ import App from './App';
 // style
 import'./index.css'
 
+// redux
+import {Provider} from "react-redux";
+import {myStore,persistor } from "./redux/store";
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={myStore}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 

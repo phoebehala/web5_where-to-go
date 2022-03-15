@@ -9,14 +9,21 @@ import List from '../components/list/List'
 // API
 import {getPalcesNearby} from '../api'
 
+// redux
+import {setCoordinates} from '../redux/locationSlice'
+import { useDispatch, useSelector } from 'react-redux';
+
 import styled from 'styled-components';
+
 const Container = styled.div``
 
 const Home = () => {
-  const [places,setPlaces] = useState([])
 
-  const [coordinates, setCoordinates] = useState({}); 
-  const [bounds, setBounds] = useState(null);
+  const dispatch = useDispatch()
+  const bounds = useSelector(state=>state.location.bounds)
+  const coordinates = useSelector(state=>state.location.coordinates)
+
+  const [places,setPlaces] = useState([])
 
   const [childClicked, setChildClicked] = useState(null)
 
@@ -24,7 +31,9 @@ const Home = () => {
   useEffect(() => {
     // built-in geolocation API
     navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
-      setCoordinates({ lat: latitude, lng: longitude });
+      dispatch(
+        setCoordinates({ lat: latitude, lng: longitude })
+      )
       
     });
   }, []); // fire the function only once
@@ -45,9 +54,6 @@ const Home = () => {
     <Container>
         <Header />
         <Map 
-          coordinates = {coordinates}
-          setBounds= {setBounds}
-          setCoordinates= {setCoordinates}
           places={places}
           setChildClicked = {setChildClicked}
         />

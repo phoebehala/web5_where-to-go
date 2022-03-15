@@ -8,8 +8,15 @@ import {RiMoneyDollarCircleLine} from 'react-icons/ri';
 import {GrCafeteria} from 'react-icons/gr';
 import {MdOutlineLocalCafe, MdOutlineShoppingCart} from 'react-icons/md';
 
-import styled from 'styled-components';
+// redux
+import {fetchDataByKinds} from '../../redux/KindSlice'
+import { useDispatch, useSelector } from 'react-redux';
 
+// API
+import {getPalcesNearby} from '../../api/index'
+
+
+import styled from 'styled-components';
 const Container = styled.div`
    position: absolute;
    z-index:1 ;
@@ -46,6 +53,14 @@ const Chip = styled.button`
 
 const Header = () => {
 
+    const bounds = useSelector(state=>state.location.bounds)
+    const coordinates = useSelector(state=>state.location.coordinates)
+
+    const handleClickKind = (kind)=>{
+        getPalcesNearby( bounds.sw, bounds.ne, kind)
+
+    }
+
   return (
     <Container>
         <SearchWrapper>
@@ -60,22 +75,22 @@ const Header = () => {
         </SearchWrapper>
 
         <Chips>
-            <Chip>
+            <Chip onClick={()=>{handleClickKind('supermarkets')}}>
                 <MdOutlineShoppingCart/>
-                <span>Supermarket</span>
+                <span>Supermarkets</span>
             </Chip>
 
-            <Chip>
+            <Chip onClick={()=>{handleClickKind('cafes')}}>
                 <MdOutlineLocalCafe/>
                 <span>Cafe</span>
             </Chip>
 
-            <Chip >
+            <Chip onClick={()=>{handleClickKind('restaurants')}}>
                 <GrCafeteria />
                 <span>Restaurant</span>     
             </Chip>
 
-            <Chip >
+            <Chip onClick={()=>{handleClickKind('atm')}}>
                 <RiMoneyDollarCircleLine/>
                 <span>ATM</span>     
             </Chip>

@@ -3,15 +3,17 @@ import axios from "axios";
 const URL = 'https://opentripmap-places-v1.p.rapidapi.com/en/places/bbox'
 
 
+
 // aync function return a promise
-export const getPalcesNearby = async(sw, ne)=>{
+export const getPalcesNearby = async(sw, ne, choosedKinds)=>{
     try {
         const res = await axios.get(URL,{
           params: {
-            lon_max: ne.lng,
-            lat_min: sw.lat,
-            lon_min: sw.lng,
-            lat_max: ne.lat
+            lon_max: ne.lng, // -122.99584417104494
+            lat_min: sw.lat, //49.219606846173264
+            lon_min: sw.lng, //-123.0816748595215
+            lat_max: ne.lat, //49.262195072249426
+            kinds: choosedKinds || []
           },
           headers: {
             'x-rapidapi-host': 'opentripmap-places-v1.p.rapidapi.com',

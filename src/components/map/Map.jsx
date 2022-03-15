@@ -15,26 +15,36 @@ import MapItem from './MapItem';
 
 import styled from 'styled-components';
 
+// redux
+import {setCoordinates, setBounds} from '../../redux/locationSlice'
+import { useDispatch, useSelector } from 'react-redux';
+
 const Container = styled.div`
    height:100vh ;
 `
 
-const Map = ( {coordinates,setBounds,setCoordinates, places, setChildClicked} ) => {
-  // lifting the state up
+const Map = ( { places, setChildClicked} ) => {
+
+  const dispatch = useDispatch()
+  const coordinates = useSelector(state=>state.location.coordinates)
 
   return (
     <Container>
         <GoogleMapReact
           bootstrapURLKeys={{ key:process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
-          // defaultCenter={coordinates}
+          defaultCenter={coordinates}
           center={coordinates}
           defaultZoom={14}
           margin={[50, 50, 50, 50]}
           // options={''}
           onChange={(e)=>{
             console.log(e);
-            setCoordinates({lat: e.center.lat, lng: e.center.lng})
-            setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
+             dispatch(
+                setCoordinates({lat: e.center.lat, lng: e.center.lng})
+              )
+              dispatch(
+                setBounds({ne: e.marginBounds.ne, sw: e.marginBounds.sw })
+              )
           }}
           onChildClick={(child)=>{setChildClicked(child)}}
         >
