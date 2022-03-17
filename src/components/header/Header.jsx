@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // import { CardContainer} from "./Card.styles";
 
@@ -10,10 +10,11 @@ import {MdOutlineLocalCafe, MdOutlineShoppingCart} from 'react-icons/md';
 
 // redux
 import {setPlaces} from '../../redux/placeSlice'
+import {setCoordinates} from '../../redux/locationSlice'
 import { useDispatch, useSelector } from 'react-redux';
-
 // API
 import {getPalcesNearby} from '../../api/index'
+import { Autocomplete } from '@react-google-maps/api';
 
 
 import styled from 'styled-components';
@@ -51,12 +52,28 @@ const Chip = styled.button`
 
 `
 
+
+
 const Header = () => {
 
     const bounds = useSelector(state=>state.location.bounds)
     const coordinates = useSelector(state=>state.location.coordinates)
 
     const  dispatch = useDispatch()
+
+    const [autoComplete, setAutocomplete] = useState(null)
+
+    const onLoad = (autoC)=> setAutocomplete(autoC)
+    
+    const onPlaceChanged =()=>{
+        // to get the lmg and lat of the place
+        const lat = autoComplete.getPlace().geometry.location.lat();
+        const lng = autoComplete.getPlace().geometry.location.lng();
+
+        dispatch(
+            setCoordinates({lat, lng})
+        )
+    }
 
     const handleClickKind = (kind)=>{
         getPalcesNearby( bounds.sw, bounds.ne, kind)
@@ -68,18 +85,24 @@ const Header = () => {
         })
     }
 
+
+
   return (
     <Container>
-        <SearchWrapper>
+        {/*  onLoad={onLoad} >>> specify what is going to happen once load <Autocomplete> component */}
+        {/*  onPlaceChanged={onPlaceChanged} >>> specify what is going to happen once the user change the input */}
+        <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+            <SearchWrapper>
 
-            <IconWrapper>
-              <SearchOutlined />
-            </IconWrapper>
+                <IconWrapper>
+                <SearchOutlined />
+                </IconWrapper>
 
-            <SearchInput
-              placeholder="Search…"
-            />
-        </SearchWrapper>
+                <SearchInput
+                placeholder="Search…"
+                />
+            </SearchWrapper>
+        </Autocomplete>
 
         <Chips>
             <Chip onClick={()=>{handleClickKind('supermarkets')}}>
