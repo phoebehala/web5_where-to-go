@@ -6,6 +6,9 @@ import Header from '../components/header/Header.jsx';
 import Map from '../components/map/Map'
 import List from '../components/list/List'
 
+//icons
+import { KeyboardArrowDown, KeyboardArrowUp} from '@material-ui/icons';
+
 // API
 import {getPalcesNearby} from '../api'
 
@@ -20,6 +23,23 @@ import styled from 'styled-components';
 const Container = styled.div`
     /* overflow:hidden  ; */
 `
+const ArrowIcon = styled.div`
+    position:absolute;
+    z-index:99;
+
+    bottom:${(props)=>props.direction==="down" ? "280px" : "0px"} ;
+    
+    left:50%;
+    transform: translateX(-50%);
+
+    color:var(--dark-gray) ;
+    border: solid var(--main-color) 1px ;
+    border-radius:50%;
+    background-color: white;
+    box-shadow: 0 0 5px #ccc;
+    display:flex ;
+    
+`
 
 const Home = () => {
 
@@ -31,6 +51,13 @@ const Home = () => {
   const places = useSelector(state=>state.place.places)
 
   const [childClicked, setChildClicked] = useState(null)
+
+
+  const [toggle, setToggle ] =useState(false);
+  const handleShowList =()=>{
+    setToggle(!toggle)
+    console.log(toggle);
+}
 
   // once a user open the app, get their current location
   useEffect(() => {
@@ -52,20 +79,40 @@ const Home = () => {
         dispatch(
           setPlaces(data) 
         )
-        console.log('Places',places);
       })
     }
   },[coordinates,bounds]) // once coordinates or bounds get changed, fire the function
-
+console.log({places});
   return (
     <Container>
         <Header />
         <Map 
-          //places={places}
           setChildClicked = {setChildClicked}
         />
-        <List //places={places}
-              childClicked={childClicked}/>
+
+        {toggle && (
+         <>
+            <ArrowIcon direction="down">
+                  <KeyboardArrowDown  style={{width:"30px", height:"100%"}}
+                                      onClick={handleShowList}/>
+            </ArrowIcon>
+            <List 
+                childClicked={childClicked}
+            />
+          </>
+          
+        )}
+
+        {!toggle && (
+          <>
+            <ArrowIcon direction="up">
+                  <KeyboardArrowUp style={{width:"30px", height:"100%"}}
+                                  onClick={handleShowList}></KeyboardArrowUp>
+            </ArrowIcon>
+          </>
+
+        )}
+
     </Container>
   )
 }
