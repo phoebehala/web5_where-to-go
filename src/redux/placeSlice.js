@@ -7,7 +7,8 @@ const placeSlice = createSlice({
     },
     reducers:{
         setPlaces: (state, action)=>{
-            state.places=action.payload
+            // filter out places which don't have name and rate // and only get 10 places
+            state.places=action.payload.filter((place)=> place.properties.name && place.properties.rate>=1).slice(0,10)
         },
        
     }
