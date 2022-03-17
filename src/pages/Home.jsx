@@ -5,6 +5,7 @@ import { useEffect, useState} from 'react';
 import Header from '../components/header/Header.jsx';
 import Map from '../components/map/Map'
 import List from '../components/list/List'
+import Filter from '../components/filter/Filter'
 
 //icons
 import { KeyboardArrowDown, KeyboardArrowUp} from '@material-ui/icons';
@@ -86,6 +87,7 @@ console.log({places});
   return (
     <Container>
         <Header />
+        <Filter />
         <Map 
           setChildClicked = {setChildClicked}
         />
