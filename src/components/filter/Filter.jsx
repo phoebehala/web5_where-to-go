@@ -11,11 +11,21 @@ import {getPalcesNearby} from '../../api/index'
 
 import styled from 'styled-components';
 const Container = styled.div`
-position:absolute ;
-z-index:999 ;
+  position:absolute ;
+  z-index:999 ;
+  background-color:white ;
+  width:50vw ;
+
 `
 
 const { Panel } = Collapse 
+const CheckboxGroup = Checkbox.Group;
+const defaultCheckedList = [''];
+const adultOptions = ['alcohol', 'casino'];
+const accomodationsOptions =['other hotels','hostels','resorts','guest houses','apartments']
+const amusementsOptions = ['baths and saunas','amusement parks','water parks' ]
+const interestingOptions = ['architecture','cultural','historic', 'industrial facilities','natural','other','religion','sport']
+const touristOptions = ['foods','banks','shops','transport' ]
 
 const KINDS = [
   {
@@ -38,16 +48,84 @@ const KINDS = [
 
 
 const Filter = () => {
+  /*filter*/
+  const [accomodations, setAccomodations] = useState([]);
+  const [adult, setAdult] = useState([]);
+  const [amusements, setAmusements] = useState([]);
+  const [interestingPlaces, setInterestingPlaces] = useState([]);
+  const [touristFacilities, setTouristFacilities] =useState([]);
+
+
+  const [checkedList, setCheckedList] = useState(accomodations.concat(amusements));
+  const [checkedStr, setCheckedStr]  = useState('');
+
   const [checkedIndex, setCheckedIndex] = useState([])
   const [checkedKinds, setCheckedKinds] = useState([])
 
+
+
   const bounds = useSelector(state=>state.location.bounds);
   const  dispatch = useDispatch();
-
   console.log({bounds});
 
+    /*filter*/
+/*
+  const onChange = list => {
+    console.log({list});
+    setCheckedList(list);
+    setIndeterminate(!!list.length && list.length < adultOptions.length);
+    setCheckAll(list.length === adultOptions.length);
+  };
+
+  const onCheckAllChange = e => {
+    console.log(e);
+    setCheckedList(e.target.checked ? adultOptions : []);
+    setIndeterminate(false);
+    setCheckAll(e.target.checked);
+  };
+*/
+const accomodationsOnChange = (newCheckedKindArr)=>{
+    console.log(newCheckedKindArr);
+    setAccomodations(newCheckedKindArr)
+}
+const adultOnChange = (newCheckedKindArr)=>{
+  console.log(newCheckedKindArr);
+  setAdult(newCheckedKindArr)
+}
+const amusementsOnChange = (newCheckedKindArr)=>{
+  console.log(newCheckedKindArr);
+  setAmusements(newCheckedKindArr)
+}
+const interestingPlacesOnChange = (newCheckedKindArr)=>{
+  console.log(newCheckedKindArr);
+  setInterestingPlaces(newCheckedKindArr)
+}
+const touristFacilitiesOnChange = (newCheckedKindArr)=>{
+  console.log(newCheckedKindArr);
+  setTouristFacilities(newCheckedKindArr)
+}
+useEffect(()=>{
+  const newCheckedList= accomodations.concat(adult).concat(amusements).concat(interestingPlaces).concat(touristFacilities)
+  console.log({newCheckedList});
+  setCheckedList(newCheckedList);
+
+  const newFormatCheckedList =[]
+  for(let element of newCheckedList){
+    let newElement = element.replaceAll(" ","_")
+    newFormatCheckedList.push(newElement)
+  }
+  setCheckedStr(newFormatCheckedList.join())
+
+},[accomodations,adult,amusements,interestingPlaces,touristFacilities])
+
+
+console.log({accomodations});
+console.log({amusements});
+console.log({checkedList});
+console.log({checkedStr});
+
   const handleToggle = (id)=>{
-    console.log({id});
+    //console.log({id});
 
     const currentIndexExist = checkedIndex.indexOf(id) // to get the index of item the user checked
     console.log({currentIndexExist});
@@ -70,17 +148,17 @@ const Filter = () => {
     //console.log({newCheckedKinds});
     setCheckedKinds(newCheckedKinds)
   }
-  console.log({checkedIndex});
-  console.log({checkedKinds});  //['resorts', 'guest_houses', 'apartment']
+  //console.log({checkedIndex});
+  //console.log({checkedKinds});  //['resorts', 'guest_houses', 'apartment']
 
   // turn arr to be a string which is the format for fetching API
-  console.log(checkedKinds.join()); // resorts,guest_houses,apartment
-  const kindsStr= checkedKinds.join()
+  //console.log(checkedKinds.join()); // resorts,guest_houses,apartment
+
 
   useEffect(()=>{
     if(bounds) {
-      console.log('fetching.....');
-      getPalcesNearby( bounds.sw, bounds.ne, kindsStr)
+      console.log(`fetching.....${checkedStr}`);
+      getPalcesNearby( bounds.sw, bounds.ne, checkedStr)
       .then((data)=>{
           console.log(data?.slice(0,10));
           dispatch(
@@ -88,7 +166,7 @@ const Filter = () => {
           )
       })
     }
-  },[checkedKinds])
+  },[checkedStr])
 
   return (
     <Container >
@@ -104,13 +182,29 @@ const Filter = () => {
                 </React.Fragment>
               ))}
             </Panel>
+
         </Collapse>
 
+
+
         <Collapse defaultActiveKey={['0']} >
-            <Checkbox >
-                Check all accomodations
-            </Checkbox>
-            <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChange} />
+          <Panel header="accomodations" key="1">
+            <Checkbox.Group options={accomodationsOptions} onChange={(e)=>accomodationsOnChange(e)}></Checkbox.Group >
+          </Panel>
+          <Panel header="adult" key="2">
+            <Checkbox.Group options={adultOptions} onChange={(e)=>adultOnChange(e)}></Checkbox.Group >
+          </Panel>
+          <Panel header="amusements" key="3">
+            <Checkbox.Group options={amusementsOptions} onChange={(e)=>amusementsOnChange(e)}></Checkbox.Group >
+          </Panel>
+          <Panel header="interesting_places" key="4">
+            <Checkbox.Group options={interestingOptions} onChange={(e)=>interestingPlacesOnChange(e)}></Checkbox.Group >
+          </Panel>
+          <Panel header="tourist_facilities" key="5">
+            <Checkbox.Group options={touristOptions} onChange={(e)=>touristFacilitiesOnChange(e)}></Checkbox.Group >
+          </Panel>
+          
+
 
         </Collapse>
       

@@ -2,17 +2,18 @@
 https://opentripmap.io/catalog
 
 ### 1. accomodations
-- hotels
+- other_hotels
+- hostels
 - resorts
 - guest_houses
-- apartment
+- apartments
 
 ### 2. adult
 - alcohol
 - casino
 
 ### 3. amusements
-- baths_and-seunas
+- baths_and_seunas
 - amusement_parks
 - water_parks
 
@@ -22,7 +23,7 @@ https://opentripmap.io/catalog
 - museums
 - theatres_and_entertainments
 
-## historical
+## historic
 ## industrial_facilities
 ## natural
 - beach
@@ -57,7 +58,7 @@ https://opentripmap.io/catalog
 - bank
 
 ## shops
-- supermarket
+- supermarkets
 - malls
 - marketplaces
 - conveniences
@@ -70,12 +71,26 @@ fuel
 car_rental
 
 
+has photo
+xid: Q5448603
+Filipino Plaza
+
+
+5 stars
+Chinatown
+Vogue Theatre
+
+
 
 Object category. Several comma-separated categories may be stated with OR logic.
 "cafes,foods,tourist_facilities"
 "restaurants,foods,tourist_facilities"
 "shops,conveniences,tourist_facilities"
 
+
+
+
+ 
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
