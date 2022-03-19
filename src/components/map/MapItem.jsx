@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import {MdLocationPin} from 'react-icons/md'
 import {RiMapPin3Fill} from 'react-icons/ri'
 
+
 const MapItem = ( {place} ) => {
     const [isPinHovered, setIsPinHovered] = useState(false)
 
@@ -13,11 +14,12 @@ const MapItem = ( {place} ) => {
                         onMouseEnter={() => setIsPinHovered(true)}
                         onMouseLeave={() => setIsPinHovered(false)}
          />
+         hihihi
 
         { isPinHovered && (
-         <div>
-            {place.properties.name}
-        </div>
+          <div>
+              {place.properties.name}
+          </div>
         )}
 
     </div>

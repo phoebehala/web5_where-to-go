@@ -15,12 +15,12 @@ import styled from 'styled-components';
 const Container = styled.div`
    position:absolute;
    z-index:10 ;
-   height:100px ;
+   height:280px ;
    width:100% ;
    bottom:0 ;
    background-color:white ;
 
-   padding: 10px 5px;
+   padding: 20px 5px 0px 5px;
 
    display:flex;
 
@@ -44,18 +44,24 @@ const List = ({ childClicked}) => {
   const  listItems = useRef()
   if(childClicked){
     console.log(listItems.current.children[childClicked]);
-    listItems.current.children[childClicked].style.border=`2px double red`
+    if (listItems.current.children[childClicked]){
+      listItems.current.children[childClicked].style.border=`2px double red`
+    }
   }
 
   return (
     <Container ref={listItems}>
      { console.log(places)}
-     
-      {/* {places?.map()  } */}
+      {
+        places && places?.length ===0 && (
+          <p>There is no any places matching the request</p>
+        )
+    
+      }
+
       {places && places.map( (place,i)=>(
         <ListItem place={place} key={i} 
                   selected={Number(childClicked) === i} 
-                  
                   />
       )
         )}

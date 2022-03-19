@@ -5,7 +5,8 @@ import { Checkbox, Collapse } from 'antd';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import {setPlaces} from '../../redux/placeSlice'
+import {setPlaces} from '../../redux/placeSlice';
+import {setKinds} from '../../redux/kindSlice';
 // API
 import {getPalcesNearby} from '../../api/index'
 
@@ -73,7 +74,9 @@ const Filter = ( {setFilterToggle} ) => {
 
 
   const bounds = useSelector(state=>state.location.bounds);
-  const places = useSelector(state=>state.place.places)
+  const places = useSelector(state=>state.place.places);
+  const choosedKinds = useSelector(state=>state.kind.kinds);
+
   const  dispatch = useDispatch();
   console.log({bounds});
 
@@ -116,10 +119,16 @@ useEffect(()=>{
 // console.log({checkedList});
 // console.log({checkedStr});
 
+useEffect(()=>{
+  dispatch(
+    setKinds(checkedStr)
+  )
+},[checkedStr])
+
   useEffect(()=>{
     if(bounds) {
-      console.log(`fetching.....${checkedStr}`);
-      getPalcesNearby( bounds.sw, bounds.ne, checkedStr)
+      console.log(`fetching.....${choosedKinds}`);
+      getPalcesNearby( bounds.sw, bounds.ne, choosedKinds)
       .then((data)=>{
           console.log(data?.slice(0,10));
           dispatch(
@@ -127,7 +136,7 @@ useEffect(()=>{
           )
       })
     }
-  },[checkedStr])
+  },[choosedKinds])
 
   return (
     <Container >

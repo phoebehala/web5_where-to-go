@@ -28,7 +28,7 @@ const ArrowIcon = styled.div`
     position:absolute;
     z-index:99;
 
-    bottom:${(props)=>props.direction==="down" ? "280px" : "0px"} ;
+    bottom:${(props)=>props.direction==="down" ? "280px" : "50px"} ;
     
     left:50%;
     transform: translateX(-50%);
@@ -39,6 +39,7 @@ const ArrowIcon = styled.div`
     background-color: white;
     box-shadow: 0 0 5px #ccc;
     display:flex ;
+
     
 `
 
@@ -47,6 +48,8 @@ const Home = () => {
   const dispatch = useDispatch()
   const bounds = useSelector(state=>state.location.bounds)
   const coordinates = useSelector(state=>state.location.coordinates)
+  const choosedKinds = useSelector(state=>state.kind.kinds);
+  const choosedRating = useSelector(state=>state.rating.rating);
 
   //const [places,setPlaces] = useState([])
   const places = useSelector(state=>state.place.places)
@@ -74,9 +77,9 @@ const Home = () => {
 
   useEffect(()=>{
     if(bounds)  {
-      getPalcesNearby(bounds.sw, bounds.ne)
+      getPalcesNearby(bounds.sw, bounds.ne,choosedKinds,choosedRating)
       .then((data)=>{
-        console.log(data.slice(0,10));
+        console.log(data?.slice(0,10));
         dispatch(
           setPlaces(data) 
         )
@@ -86,7 +89,7 @@ const Home = () => {
 console.log({places});
   return (
     <Container>
-        <Header setFilterToggle={setFilterToggle } />
+        <Header setFilterToggle={setFilterToggle }/>
         {filterToggle &&(
             <Filter setFilterToggle={setFilterToggle }/>
         )}

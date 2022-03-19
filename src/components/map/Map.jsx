@@ -1,11 +1,5 @@
 import React, { useState } from 'react'
 
-// MaterialUI components
-import Rating from '@material-ui/lab'
-
-// icons
-import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
-
 
 // api
 import GoogleMapReact from 'google-map-react'
@@ -29,6 +23,12 @@ const Map = ( {setChildClicked} ) => {
   const coordinates = useSelector(state=>state.location.coordinates)
   const places = useSelector(state=>state.place.places)
 
+
+  const handleClickChild = (child)=>{
+    setChildClicked(child)
+
+  }
+
   return (
     <Container>
         <GoogleMapReact
@@ -47,7 +47,7 @@ const Map = ( {setChildClicked} ) => {
                 setBounds({ne: e.marginBounds.ne, sw: e.marginBounds.sw })
               )
           }}
-          onChildClick={(child)=>{setChildClicked(child)}}
+          onChildClick={(child)=>{handleClickChild(child)}}
         >
           {places && places.map((place,i)=>(    
               <MapItem

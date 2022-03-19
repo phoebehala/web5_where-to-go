@@ -3,15 +3,15 @@ import {createSlice} from "@reduxjs/toolkit"
 const kindsSlice = createSlice({
     name:"kinds",
     initialState:{
-        kinds: [],
+        kinds: '',
     },
     reducers:{
-        fetchDataByKinds: (state, action)=>{
-            state.kinds.push(action.payload)
+        setKinds: (state, action)=>{
+            state.kinds=action.payload
         }
 
     }
 })
 
-export const {fetchDataByKinds } = kindsSlice.actions;
+export const {setKinds } = kindsSlice.actions;
 export default kindsSlice.reducer;
