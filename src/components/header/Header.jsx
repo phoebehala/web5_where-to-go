@@ -42,6 +42,7 @@ const SearchInput =styled.input`
 `
 const Chips = styled.div`
     display:flex ;
+    overflow:scroll ;
 `
 const Chip = styled.button`
     display:flex ;
@@ -54,7 +55,7 @@ const Chip = styled.button`
 
 
 
-const Header = () => {
+const Header = ({setFilterToggle} ) => {
 
     const bounds = useSelector(state=>state.location.bounds)
     const coordinates = useSelector(state=>state.location.coordinates)
@@ -84,8 +85,6 @@ const Header = () => {
             )
         })
     }
-
-
 
   return (
     <Container>
@@ -123,6 +122,9 @@ const Header = () => {
             <Chip onClick={()=>{handleClickKind('atm')}}>
                 <RiMoneyDollarCircleLine/>
                 <span>ATM</span>     
+            </Chip>
+            <Chip onClick={()=>setFilterToggle(true)}>
+                <span>More...</span>     
             </Chip>
         </Chips>
 

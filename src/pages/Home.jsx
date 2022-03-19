@@ -53,7 +53,7 @@ const Home = () => {
 
   const [childClicked, setChildClicked] = useState(null)
 
-
+  const [filterToggle, setFilterToggle ] =useState(false);
   const [toggle, setToggle ] =useState(false);
   const handleShowList =()=>{
     setToggle(!toggle)
@@ -86,8 +86,10 @@ const Home = () => {
 console.log({places});
   return (
     <Container>
-        <Header />
-        <Filter />
+        <Header setFilterToggle={setFilterToggle } />
+        {filterToggle &&(
+            <Filter setFilterToggle={setFilterToggle }/>
+        )}
         <Map 
           setChildClicked = {setChildClicked}
         />
