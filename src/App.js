@@ -4,7 +4,6 @@ import './app.css'
 // pages
 import Home from './pages/Home';
 
-
 function App() {
  
   return (
