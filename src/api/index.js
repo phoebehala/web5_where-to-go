@@ -17,7 +17,7 @@ export const getPalcesNearby = async(sw, ne, choosedKinds, choosedRating)=>{
           },
           headers: {
             'x-rapidapi-host': 'opentripmap-places-v1.p.rapidapi.com',
-            'x-rapidapi-key': '36d0287890msh9909e4f0304fb9ap169b23jsne7e772bb61a5'
+            'x-rapidapi-key': process.env.REACT_APP_RAPID_API_places_KEY
           }
         });
         console.log(res); //{data:{},status:200, statusText: 'OK', headers: {…}, config: {…}, …}}
@@ -35,7 +35,7 @@ export const getPalcesDetails = async(xid)=>{
       const res = await axios.get(`https://opentripmap-places-v1.p.rapidapi.com/en/places/xid/${xid}`,{
         headers: {
           'x-rapidapi-host': 'opentripmap-places-v1.p.rapidapi.com',
-          'x-rapidapi-key': '36d0287890msh9909e4f0304fb9ap169b23jsne7e772bb61a5'
+          'x-rapidapi-key': process.env.REACT_APP_RAPID_API_places_KEY
         }
       });
       console.log(res); //{data:{},status:200, statusText: 'OK', headers: {…}, config: {…}, …}}
