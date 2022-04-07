@@ -5,6 +5,7 @@ import {getPalcesDetails} from '../../../api';
 
 // materialUI component
 import Rating from '@material-ui/lab/Rating';
+import { CircularProgress } from '@material-ui/core';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +16,8 @@ import {setKinds} from '../../../redux/kindSlice';
 import {getPalcesNearby} from '../../../api'
 
 import styled from 'styled-components';
+import { Room } from '@material-ui/icons';
+
 
 const Container = styled.div`
   border:1px solid var(--main-color) ;
@@ -25,7 +28,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content:space-around ;
-
 
 `
 
@@ -66,7 +68,13 @@ height:120px ; */
 object-fit:cover;
 
 `
-const Address = styled.div``
+const Address = styled.div`
+  display:flex ;
+  justify-content:flex-start ;
+  align-items:center ;
+  margin:4px 0;
+
+`
 const Desc = styled.div`
 flex:3;
 overflow:scroll ;
@@ -77,24 +85,27 @@ const ListItem = ({place, selected }) => {
   const bounds = useSelector(state=>state.location.bounds)
   const choosedKinds = useSelector(state=>state.kind.kinds);
   const choosedRating = useSelector(state=>state.rating.rating);
+  const toggle = useSelector(state => state.listToggle.toggle)
   const  dispatch = useDispatch()
 
   const [details, setDetails] = useState({})
-
-  console.log(place.properties.rate);
+  const [isLoading, setIsLoading] = useState(false)
+  //console.log(place.properties.rate);
   //console.log({selected});
   const  selectedItem = useRef()
-  if (selected) {
+  if (selected && toggle===true) {
     selectedItem?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   useEffect(()=>{
     const xid = place.properties.xid
-       getPalcesDetails(xid)
-       .then((data)=>{
+    setIsLoading(true)
+    getPalcesDetails(xid)
+      .then((data)=>{
          //setIsDetailOpen(true)
          console.log(data);
          setDetails(data)
+         setIsLoading(false)
        })
   },[])
   //console.log({details});
@@ -119,8 +130,14 @@ const ListItem = ({place, selected }) => {
   },[choosedKinds])
   
   return (
-    
     <Container ref={selectedItem}>
+
+    {isLoading?(
+      <div style={{margin:'auto'}}>
+        <CircularProgress size={'5rem'} />
+      </div>
+    ):(
+    <>
       <ImageWrapper >
           <Image src={ details.preview?.source 
                       ? details.preview.source
@@ -131,9 +148,12 @@ const ListItem = ({place, selected }) => {
         <Info>
           <Title > {place.properties.name}</Title>
           <Address>
+            <Room/>
+            <>
               {details.address &&  details.address.city},
               {details.address &&  details.address.county},
               {details.address && details.address.country} 
+            </>
           </Address>
 
           <SubInfoWrapper>
@@ -149,9 +169,12 @@ const ListItem = ({place, selected }) => {
         <Desc>
             {details.wikipedia_extracts?.text 
             ? details.wikipedia_extracts.text
-            : "peding to be updated"}
+            : "pending to be updated"}
         </Desc>
-  
+    </>
+  )
+}
+
     </Container>
   )
 }

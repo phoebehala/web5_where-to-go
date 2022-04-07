@@ -13,11 +13,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const Container = styled.div`
-   position:absolute;
-   z-index:10 ;
+   /* position:absolute;
+   z-index:10 ; */
    height:280px ;
-   width:100% ;
-   bottom:0 ;
+   /* width:100% ; */
+   /* bottom:0 ; */
    background-color:white ;
 
    padding: 20px 5px 0px 5px;
@@ -31,6 +31,7 @@ const List = ({ childClicked}) => {
 
   const places = useSelector(state=>state.place.places)
 
+/*
   // in order to access the listItem a user clicked
   // at the start, there is no any places so elementIndex is an empty arr
   const [elementsIndex, setElementsIndex] = useState([]); 
@@ -38,20 +39,31 @@ const List = ({ childClicked}) => {
     // set index for all listItem
     setElementsIndex(Array(places.length).map((_, i) => i))
   },[places]) // fire the function whenver places get changed
-
+*/
   //console.log({elementRefs});
   //console.log({childClicked});
-  const  listItems = useRef()
-  if(childClicked){
-    console.log(listItems.current.children[childClicked]);
-    if (listItems.current.children[childClicked]){
-      listItems.current.children[childClicked].style.border=`2px double red`
+
+  const  listItemsRef = useRef()
+  console.log({listItemsRef});
+
+  if(childClicked){ // childClicked >>> the index the user click
+    //console.log(listItemsRef.current.children);
+    //console.log(listItemsRef.current.children[childClicked]);
+    const listItems = listItemsRef.current.children
+    for(let i=0; i<listItems.length; i++){ // reset border for each listItem
+      listItems[i].style.border=`1px solid var(--main-color)`
+
+      // only applied specific style for clicked listItem
+      if (listItems[childClicked]){
+        listItems[childClicked].style.border=`2px double red`
+      }
+
     }
   }
 
   return (
-    <Container ref={listItems}>
-     { console.log(places)}
+    <Container ref={listItemsRef}>
+     {/* { console.log(places)} */}
       {
         places && places?.length ===0 && (
           <p>There is no any places matching the request</p>
