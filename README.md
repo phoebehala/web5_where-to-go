@@ -1,121 +1,63 @@
-styled-components
-antd components
-useRef(),useState(), react componet props, react evnet
-redux
-axios
+# Where To Go
+> To find places nearby 
+> Live demo [_here_](https://mystifying-bell-0b2b31.netlify.app).
 
-
-API
-google Map API
-opentrip
-
-## Table of contents
-* [General info](#general-info)
-* [Technologies](#technologies)
+## Table of Contents
+* [General Info](#general-information)
+* [Technologies Used](#technologies-used)
+* [Features](#features)
+* [Screenshots](#screenshots)
 * [Setup](#setup)
 
-## General info
-This project is simple Lorem ipsum dolor generator.
+
+## General Information
+
+### Idea / Motivation
+Finding places nearby is one of the most features I reply on in my real life.
+As being not having good sense of direction, it's quite help when I can know where to go based on my current location.
+That's why I'd like to buid an app which has similar features as the google map app.
+
+### Purposes / Intentions
+- To learn how to display the global map in react app
+- To consolidate the usage of redux, useState, useRef
+- To work with API and separate the file for it
+- To become comfortable with styled-components
+
 	
-## Technologies
-Project is created with:
-* Lorem version: 12.3
-* Ipsum version: 2.33
-* Ament library version: 999
-	
-## Setup
-To run this project, install it locally using npm:
+## Technologies Used
+
+#### react.js
+- react props, useState(), useRef(), react evnet
+
+#### redux
+- redux-toolkit
+
+#### styles
+- styled-components
+
+#### other libraries
+- axios
+- antd
+- google-map-react
 
 
+## Features
+#### To get the current location and places nearby from API
+#### To find nearby places based on one or more categories
+- Created a popover with pure react to implement above action
+- Can also clicking the category in the list panel to find more related places
+#### To display data on the map and the list simultaneously
+- Showing the corresponding information in the list while clicking the pin on the map
 
+<!-- 
+#### others
+- To display progress icon while fetching data
+-->
+## Screenshots
+![Example screenshot](./img/screenshot.png)
 
-#### kind
-https://opentripmap.io/catalog
-
-### 1. accomodations
-- other_hotels
-- hostels
-- resorts
-- guest_houses
-- apartments
-
-### 2. adult
-- alcohol
-- casino
-
-### 3. amusements
-- baths_and_seunas
-- amusement_parks
-- water_parks
-
-### 4. interesting_places
-## architecture
-## cultural
-- museums
-- theatres_and_entertainments
-
-## historic
-## industrial_facilities
-## natural
-- beach
-- islands
-- natural_springs
-- nature_reserves
-- water
-
-## other
-- tourist_object
-- view_points
-## religion
-- churches
-- buddhist_temples
-
-
-### sport
-- climbing
-- pools
-- stadiums
-
-
-### 5.tourist_facilities
-## foods
-- cafes
-- picnic
-- restaurants
-- picnic_sites
-
-## banks
-- ATM
-- bank
-
-## shops
-- supermarkets
-- malls
-- marketplaces
-- conveniences
-
-
-## transport
-charging_station
-bicycle_rental
-fuel
-car_rental
-
-
-has photo
-xid: Q5448603
-Filipino Plaza
-
-
-5 stars
-Chinatown
-Vogue Theatre
-
-
-
-Object category. Several comma-separated categories may be stated with OR logic.
-"cafes,foods,tourist_facilities"
-"restaurants,foods,tourist_facilities"
-"shops,conveniences,tourist_facilities"
+## API Source
+- google Map API
+- opentrip
 
 
