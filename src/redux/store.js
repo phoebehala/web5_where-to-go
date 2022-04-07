@@ -1,7 +1,7 @@
 import {configureStore, combineReducers} from "@reduxjs/toolkit";
 
 // slice
-import kindReducer from "./kindSlice";
+import kindReducer from "./KindSlice";
 import locationReducer from './locationSlice'
 import placeReducer from './placeSlice';
 import ratingReducer from "./ratingSlice";

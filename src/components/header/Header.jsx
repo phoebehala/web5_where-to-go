@@ -18,7 +18,7 @@ import { InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
 import {setPlaces} from '../../redux/placeSlice'
 import {setCoordinates} from '../../redux/locationSlice'
 import { useDispatch, useSelector } from 'react-redux';
-import {setKinds} from '../../redux/kindSlice';
+import {setKinds} from '../../redux/KindSlice';
 import {setRating} from '../../redux/ratingSlice';
 // API
 import {getPalcesNearby} from '../../api/index'

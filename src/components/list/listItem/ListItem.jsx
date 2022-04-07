@@ -10,7 +10,7 @@ import { CircularProgress } from '@material-ui/core';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import {setPlaces} from '../../../redux/placeSlice';
-import {setKinds} from '../../../redux/kindSlice';
+import {setKinds} from '../../../redux/KindSlice';
 
 // API
 import {getPalcesNearby} from '../../../api'
