@@ -1,0 +1,36 @@
+.ant-collapse:not(:last-child){
+    /* margin-right: 20px;
+    background-color: red; */
+}
+.ant-collapse-item{
+    margin:15px 5px;
+    font-size: 1.4rem;
+
+}
+
+.ant-collapse-header{
+    display: flex;
+    
+}
+.ant-collapse-arrow{
+    margin-right: 5px;
+    font-size: 1.4rem;
+}
+
+
+.ant-collapse-content{
+    margin-left: 15px;
+    margin-top:5px ;
+
+}
+.ant-checkbox-group{
+    display: flex;
+    flex-direction: column;
+    
+}
+.ant-checkbox{
+    margin-right: 3px;
+}
+.ant-checkbox-wrapper:not(:last-child){
+    margin-bottom: 5px;
+}
