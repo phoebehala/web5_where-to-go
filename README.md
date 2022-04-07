@@ -1,5 +1,5 @@
 # Where To Go
-> To find places nearby 
+> To find places nearby.
 > Live demo [_here_](https://mystifying-bell-0b2b31.netlify.app).
 
 ## Table of Contents
@@ -7,7 +7,6 @@
 * [Technologies Used](#technologies-used)
 * [Features](#features)
 * [Screenshots](#screenshots)
-* [Setup](#setup)
 
 
 ## General Information
