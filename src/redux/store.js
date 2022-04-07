@@ -5,7 +5,7 @@ import kindReducer from "./kindSlice";
 import locationReducer from './locationSlice'
 import placeReducer from './placeSlice';
 import ratingReducer from "./ratingSlice";
-
+import listToggleReducer from './ListToggleSlice'
 
 
 export const myStore = configureStore({
@@ -13,6 +13,7 @@ export const myStore = configureStore({
         kind:kindReducer,
         location:locationReducer,
         place:placeReducer,
-        rating:ratingReducer
+        rating:ratingReducer,
+        listToggle:listToggleReducer,
     }
 })
