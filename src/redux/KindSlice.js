@@ -12,5 +12,6 @@ const kindsSlice = createSlice({
 
     }
 })
+
 export const {setKinds } = kindsSlice.actions;
 export default kindsSlice.reducer;
