@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+// material UI
+import { LinearProgress } from '@material-ui/core';
 
 // api
 import GoogleMapReact from 'google-map-react'
@@ -12,12 +14,13 @@ import styled from 'styled-components';
 // redux
 import {setCoordinates, setBounds} from '../../redux/locationSlice'
 import { useDispatch, useSelector } from 'react-redux';
+import {setToggle} from '../../redux/ListToggleSlice'
 
 const Container = styled.div`
    height:100vh ;
 `
 
-const Map = ( {setChildClicked} ) => {
+const Map = ( {setChildClicked, isMapLoading} ) => {
 
   const dispatch = useDispatch()
   const coordinates = useSelector(state=>state.location.coordinates)
@@ -25,12 +28,17 @@ const Map = ( {setChildClicked} ) => {
 
 
   const handleClickChild = (child)=>{
+    dispatch(
+      setToggle(true)
+    )
     setChildClicked(child)
 
   }
+  // if (isMapLoading) return <LinearProgress />;
 
   return (
     <Container>
+      {isMapLoading && < LinearProgress /> }
         <GoogleMapReact
           bootstrapURLKeys={{ key:process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
           defaultCenter={coordinates}
@@ -49,19 +57,19 @@ const Map = ( {setChildClicked} ) => {
           }}
           onChildClick={(child)=>{handleClickChild(child)}}
         >
-          {places && places.map((place,i)=>(    
-              <MapItem
-                key={i}
-                lat={place.geometry.coordinates[1]}
-                lng={place.geometry.coordinates[0]}
-                place={place} 
-              />
-          ))
-          }
 
+      {places && places.map((place,i)=>(    
+          <MapItem
+            key={i}
+            lat={place.geometry.coordinates[1]}
+            lng={place.geometry.coordinates[0]}
+            place={place} 
+          />
+      ))}
 
         </GoogleMapReact>
     </Container>
+
   )
 }
 

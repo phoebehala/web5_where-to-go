@@ -4,6 +4,18 @@ import React, { useState } from 'react'
 import {MdLocationPin} from 'react-icons/md'
 import {RiMapPin3Fill} from 'react-icons/ri'
 
+// materialUI component
+import Rating from '@material-ui/lab/Rating';
+
+import styled from 'styled-components';
+
+const BriefWrapper = styled.div`
+    min-width:150px;
+    background-color: white;
+    padding:5px 10px ;
+
+  
+`
 
 const MapItem = ( {place} ) => {
     const [isPinHovered, setIsPinHovered] = useState(false)
@@ -14,12 +26,15 @@ const MapItem = ( {place} ) => {
                         onMouseEnter={() => setIsPinHovered(true)}
                         onMouseLeave={() => setIsPinHovered(false)}
          />
-         hihihi
+         {/* hihihi */}
 
         { isPinHovered && (
-          <div>
-              {place.properties.name}
-          </div>
+          <BriefWrapper>
+              <p>{place.properties.name}</p>
+              <div>
+                <Rating name="read-only" value={place.properties.rate} readOnly />
+              </div>
+          </BriefWrapper>
         )}
 
     </div>
