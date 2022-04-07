@@ -30,31 +30,38 @@ const Container = styled.div`
    position: absolute;
    z-index:1 ;
 
-
+   padding:10px ;
 `
 const Top = styled.div`
-display:flex ;
+    display:flex ;
+    align-items: center;
+
+
 `
 
 const SearchWrapper = styled.div`
     display:flex ;
     align-items:center;
 
-    border:1px solid var(--main-color);
+    /* border:1px solid var(--main-color); */
+    box-shadow: 1px 1px 2px grey;   
     background-color:white ;
     border-radius:5px ;
-    width:200px ;
-    height:20px ;
+    width:150px ;
+    height:25px ;
 
     padding:5px ;
 `
 const RattingWrapper = styled.div`
-    background-color:white ;
-    width:200px ;
+    background-color: white;
+    width:100px ;
+
+    margin-left:15px ;
 `
 
 const IconWrapper = styled.div`
     margin-right:5px ;
+
 `
 const SearchInput =styled.input`
     border:none ;
@@ -63,15 +70,26 @@ const SearchInput =styled.input`
 
 const Chips = styled.div`
     display:flex ;
+    width:100vw ;
     overflow:scroll ;
+
+    margin-top:10px;
+
 `
 const Chip = styled.button`
     display:flex ;
     background-color:white;
-    border:var(--main-color) 1px solid ;
+
+    border:none ;
+    box-shadow: 1px 1px 2px grey;   
+
     border-radius:20px;
     padding: 5px 10px;
+    margin:0 3px ;
 
+    span{
+        margin-left:3px ;
+    }
 `
 
 
@@ -152,10 +170,11 @@ const Header = ({setFilterToggle} ) => {
             </Autocomplete>
 
             <RattingWrapper>
-                <FormControl  fullWidth variant="standard" >
+                <FormControl fullWidth   variant='filled'>
                     <InputLabel id="rating" style={{fontSize:"1.2rem"}}>Rating</InputLabel>
                     <Select id="rating" 
                             labelId="rating"
+                            variant='filled'
                             value={choosedRating} 
                             label="Age"
                             onChange={(e)=>handleClickRating(e.target.value)} >
