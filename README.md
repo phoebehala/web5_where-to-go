@@ -26,7 +26,7 @@ That's why I'd like to buid an app which has similar features as the google map 
 ## Technologies Used
 
 #### react.js
-- react props, useState(), useRef(), react event
+- react props, useState(), useRef(), react events
 
 #### redux
 - redux-toolkit
