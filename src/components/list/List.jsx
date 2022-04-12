@@ -27,9 +27,16 @@ const Container = styled.div`
    overflow: scroll;
 `
 
-const List = ({ childClicked}) => {
+const List = ({ childClicked, setChildClicked}) => {
 
   const places = useSelector(state=>state.place.places)
+
+  // to get rid of style.border when there is no result
+  useEffect(()=>{
+    if(places?.length ===0){
+      setChildClicked(undefined)
+    }
+  },[places])
 
 /*
   // in order to access the listItem a user clicked

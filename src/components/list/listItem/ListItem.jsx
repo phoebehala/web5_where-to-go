@@ -64,7 +64,7 @@ const ListItem = ({place, selected }) => {
   useEffect(()=>{
     getPalcesNearby( bounds.sw, bounds.ne, choosedKinds, choosedRating)   //  getPalcesNearby() >>> async func returning a promise
     .then((data)=>{
-      console.log(data.slice(0,10));
+      console.log(data?.slice(0,10));
       dispatch(
         setPlaces(data) 
       )

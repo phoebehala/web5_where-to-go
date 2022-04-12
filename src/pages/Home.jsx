@@ -105,6 +105,7 @@ console.log({places});
 
             <List 
                 childClicked={childClicked}
+                setChildClicked = {setChildClicked}
             />
 
         </ListPanel>
@@ -122,6 +123,7 @@ console.log({places});
 
             <List 
                 childClicked={childClicked}
+                setChildClicked = {setChildClicked}
             />
 
         </ListPanel>
