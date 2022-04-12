@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   border:1px solid var(--main-color) ;
-  width:200px;
   margin:5px ;
   padding:5px ;
 
@@ -13,6 +12,7 @@ export const Container = styled.div`
 `
 
 export const Info = styled.div`
+  width:200px ;
   flex:1;
 `
 export const Title = styled.p`
