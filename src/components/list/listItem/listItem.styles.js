@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  max-width:250px ;
+
   border:1px solid var(--main-color) ;
   margin:5px ;
   padding:5px ;
@@ -12,7 +14,8 @@ export const Container = styled.div`
 `
 
 export const Info = styled.div`
-  width:200px ;
+  min-width:200px ;
+
   flex:1;
 `
 export const Title = styled.p`
@@ -21,21 +24,22 @@ export const Title = styled.p`
   margin:0 ;
 `
 export const SubInfoWrapper = styled.div`
-width:100% ;
-display:flex ;
-align-items:center ;
-justify-content:space-between ;
+  min-width:200px ;
 
-padding: 2px 5px 2px 0 ;
+  display:flex ;
+  align-items:center ;
+  justify-content:space-between ;
+
+  padding: 2px 5px 2px 0 ;
 `
 export const Chips = styled.div`
 `
 export const Chip = styled.button`
-    background-color:white;
-    border:var(--main-color) 1px solid ;
-    border-radius:20px;
-    padding: 5px;
-    font-size:1rem ;
+  background-color:white;
+  border:var(--main-color) 1px solid ;
+  border-radius:20px;
+  padding: 5px;
+  font-size:1rem ;
 `
 
 export const ImageWrapper = styled.div`
@@ -58,7 +62,7 @@ export const Address = styled.div`
 
 `
 export const Desc = styled.div`
-width:100%;
-flex:3;
-overflow:scroll ;
+  min-width:200px ;
+  flex:3;
+  overflow:scroll ;
 `
