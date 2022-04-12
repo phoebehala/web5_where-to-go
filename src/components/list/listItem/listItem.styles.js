@@ -40,6 +40,7 @@ export const Chip = styled.button`
   border-radius:20px;
   padding: 5px;
   font-size:1rem ;
+  cursor: pointer;
 `
 
 export const ImageWrapper = styled.div`
