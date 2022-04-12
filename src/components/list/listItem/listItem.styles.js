@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   border:1px solid var(--main-color) ;
-  min-width:200px;
+  width:200px;
   margin:5px ;
   padding:5px ;
 
@@ -21,6 +21,7 @@ export const Title = styled.p`
   margin:0 ;
 `
 export const SubInfoWrapper = styled.div`
+width:100% ;
 display:flex ;
 align-items:center ;
 justify-content:space-between ;
@@ -57,6 +58,7 @@ export const Address = styled.div`
 
 `
 export const Desc = styled.div`
+width:100%;
 flex:3;
 overflow:scroll ;
 `
