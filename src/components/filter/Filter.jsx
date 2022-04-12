@@ -48,6 +48,7 @@ const Result = styled.div`
   }
 `
 const Done = styled.button`
+  cursor: pointer;
 `
 
 const { Panel } = Collapse 

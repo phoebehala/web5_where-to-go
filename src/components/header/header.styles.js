@@ -58,6 +58,7 @@ export const Chip = styled.button`
     border-radius:20px;
     padding: 5px 10px;
     margin:0 3px ;
+    cursor: pointer;
 
     span{
         margin-left:3px ;
