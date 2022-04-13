@@ -41,6 +41,7 @@ const ListItem = ({place, selected }) => {
 
   useEffect(()=>{
     const xid = place.properties.xid
+    console.log({xid});
     setIsLoading(true)
     getPalcesDetails(xid)
       .then((data)=>{
@@ -49,6 +50,9 @@ const ListItem = ({place, selected }) => {
          setDetails(data)
          setIsLoading(false)
        })
+       .catch(()=>{
+        setIsLoading(false)
+       })
   },[])
   //console.log({details});
 
@@ -56,20 +60,28 @@ const ListItem = ({place, selected }) => {
 
   const handleClickKind = ()=>{
       const kind = place.properties.kinds.split(",")[0]
-      dispatch(
-        setKinds(kind)
-      )
-
+      getPalcesNearby( bounds.sw, bounds.ne, kind, choosedRating)
+      .then((data)=>{
+             console.log(data?.slice(0,10));
+             dispatch(
+               setPlaces(data) 
+             )
+           })
+ /* run getPalcesNearby() instead of setting kindslice  */
+      // dispatch(
+      //   setKinds(kind)
+      // )
   }
-  useEffect(()=>{
-    getPalcesNearby( bounds.sw, bounds.ne, choosedKinds, choosedRating)   //  getPalcesNearby() >>> async func returning a promise
-    .then((data)=>{
-      console.log(data?.slice(0,10));
-      dispatch(
-        setPlaces(data) 
-      )
-    })
-  },[choosedKinds])
+  /* handleClickKind using kindslice result in re-render issue: every time a user choose kinds in filter.jsx, useEffect() fire when it comes to ListItem.jsx*/
+  // useEffect(()=>{
+  //   getPalcesNearby( bounds.sw, bounds.ne, choosedKinds, choosedRating)   //  getPalcesNearby() >>> async func returning a promise
+  //   .then((data)=>{
+  //     console.log(data?.slice(0,10));
+  //     dispatch(
+  //       setPlaces(data) 
+  //     )
+  //   })
+  // },[choosedKinds])
   
   return (
     <Container ref={selectedItem}>

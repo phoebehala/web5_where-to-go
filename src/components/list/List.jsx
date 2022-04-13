@@ -53,7 +53,7 @@ const List = ({ childClicked, setChildClicked}) => {
   const  listItemsRef = useRef()
   console.log({listItemsRef});
 
-  if(childClicked){ // childClicked >>> the index the user click
+  if( childClicked){ // childClicked >>> the index the user click
     //console.log(listItemsRef.current.children);
     //console.log(listItemsRef.current.children[childClicked]);
     const listItems = listItemsRef.current.children
@@ -78,7 +78,7 @@ const List = ({ childClicked, setChildClicked}) => {
     
       }
 
-      {places && places.map( (place,i)=>(
+      {places?.length >0 && places.map( (place,i)=>(
         <ListItem place={place} key={i} 
                   selected={Number(childClicked) === i} 
                   />
