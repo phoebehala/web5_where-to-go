@@ -6,7 +6,7 @@
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Screenshots](#screenshots)
+* [API Source](#API-Source)
 
 
 ## General Information
@@ -52,8 +52,6 @@ That's why I'd like to build an app which has similar features as the google map
 #### others
 - To display progress icon while fetching data
 -->
-## Screenshots
-![Example screenshot](./img/screenshot.png)
 
 ## API Source
 - google Map API
