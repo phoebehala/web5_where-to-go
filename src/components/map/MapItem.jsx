@@ -10,6 +10,7 @@ import Rating from '@material-ui/lab/Rating';
 import styled from 'styled-components';
 
 const BriefWrapper = styled.div`
+    z-index:999;
     min-width:150px;
     background-color: white;
     padding:5px 10px ;
