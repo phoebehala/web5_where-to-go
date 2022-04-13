@@ -12,9 +12,9 @@
 ## General Information
 
 ### Idea / Motivation
-Finding places nearby is one of the most features I reply on in my real life.
-As being not having good sense of direction, it's quite help when I can know where to go based on my current location.
-That's why I'd like to buid an app which has similar features as the google map app.
+Finding places nearby is one of the best features I rely on in my real life.
+As I don't have a good sense of direction, it's quite helpful when I know where to go based on my current location.
+That's why I'd like to build an app which has similar features as the google map app.
 
 ### Purposes / Intentions
 - To learn how to display the global map in react app
@@ -26,7 +26,7 @@ That's why I'd like to buid an app which has similar features as the google map 
 ## Technologies Used
 
 #### react.js
-- react props, useState(), useRef(), react events
+- react props, useState(), useRef(), react events, useEffect()
 
 #### redux
 - redux-toolkit
